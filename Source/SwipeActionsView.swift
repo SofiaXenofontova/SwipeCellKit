@@ -63,7 +63,7 @@ class SwipeActionsView: UIView {
     }
 
     var preferredWidth: CGFloat {
-        return minimumButtonWidth * CGFloat(actions.count) + safeAreaMargin
+        return minimumButtonWidth * CGFloat(actions.count)
     }
 
     var contentSize: CGSize {
@@ -118,16 +118,16 @@ class SwipeActionsView: UIView {
             self.backgroundColor = backgroundColor
         }
         else if #available(iOS 13.0, *) {
-            backgroundColor = UIColor.systemGray5
+            backgroundColor = .clear
         } else {
-            backgroundColor = #colorLiteral(red: 0.7803494334, green: 0.7761332393, blue: 0.7967314124, alpha: 1)
+            backgroundColor = .clear
         }
     #else
         if let backgroundColor = options.backgroundColor {
             self.backgroundColor = backgroundColor
         }
         else {
-            backgroundColor = #colorLiteral(red: 0.7803494334, green: 0.7761332393, blue: 0.7967314124, alpha: 1)
+            backgroundColor = .clear
         }
     #endif
         
@@ -143,7 +143,7 @@ class SwipeActionsView: UIView {
             let actionButton = SwipeActionButton(action: action)
             actionButton.addTarget(self, action: #selector(actionTapped(button:)), for: .touchUpInside)
             actionButton.autoresizingMask = [.flexibleHeight, orientation == .right ? .flexibleRightMargin : .flexibleLeftMargin]
-            actionButton.spacing = options.buttonSpacing ?? 8
+            actionButton.spacing = options.buttonSpacing ?? 0
             actionButton.contentEdgeInsets = buttonEdgeInsets(fromOptions: options)
             return actionButton
         })
@@ -202,7 +202,7 @@ class SwipeActionsView: UIView {
     }
     
     func buttonEdgeInsets(fromOptions options: SwipeOptions) -> UIEdgeInsets {
-        let padding = options.buttonPadding ?? 8
+        let padding = options.buttonPadding ?? 0
         return UIEdgeInsets(top: padding, left: padding, bottom: padding, right: padding)
     }
     
@@ -331,12 +331,12 @@ class SwipeActionButtonWrapperView: UIView {
             default:
             #if canImport(Combine)
                 if #available(iOS 13.0, *) {
-                    actionBackgroundColor = UIColor.systemGray3
+                    actionBackgroundColor = .clear
                 } else {
-                    actionBackgroundColor = #colorLiteral(red: 0.7803494334, green: 0.7761332393, blue: 0.7967314124, alpha: 1)
+                    actionBackgroundColor = .clear
                 }
             #else
-                actionBackgroundColor = #colorLiteral(red: 0.7803494334, green: 0.7761332393, blue: 0.7967314124, alpha: 1)
+                actionBackgroundColor = .clear
             #endif
             }
         }
